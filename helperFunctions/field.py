@@ -70,22 +70,24 @@ def set_button(field, row, col, number, color):
     button.color = color
 
 
-def set_buttons(field):
-    set_button(field, 0, 0, 5, TileColor.RED)
-    set_button(field, 3, 3, 9, TileColor.BLUE)
-    set_button(field, 3, 6, 10, TileColor.GREEN)
-    set_button(field, 4, 3, 7, TileColor.YELLOW)
-    set_button(field, 5, 0, 7, TileColor.PURPLE)
-    set_button(field, 5, 5, 4, TileColor.ORANGE)
-    set_button(field, 6, 0, 4, TileColor.PINK)
-    set_button(field, 1, 4, None, TileColor.BLOCK)
-    set_button(field, 2, 4, None, TileColor.BLOCK)
-    set_button(field, 2, 5, None, TileColor.BLOCK)
+def set_buttons(field, level):
+
+    #print(F"Row: {LEVELS[0][1][0]}, Col: {LEVELS[0][1][1]}, Number: {LEVELS[0][1][2]}, Color: {LEVELS[0][1][3]}")
+    for row in field.buttons:
+        for button in row:
+            button.color = TileColor.OPEN
+            button.number = None
+
+    for row, col, number, color in LEVELS[level - 1]:
+        #print(F"Row: {row}, Col: {col}, Number: {number}, Color: {color}")
+        set_button(field, row, col, number, color)
+
 
 
 def make_field():
     field = Field(N, SCREEN_SIZE)
-    set_buttons(field)
+
+    #set_buttons(field)
 
     #field.display()
     return field

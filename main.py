@@ -1,6 +1,6 @@
 import pygame, sys
 from helperFunctions.global_constants import *
-from helperFunctions.field import make_field
+from helperFunctions.field import make_field, set_buttons
 from helperFunctions.generate import *
 
 
@@ -17,7 +17,10 @@ def main():
     selection_rect = None
     current_button = None
 
+    level = 1
+
     field = make_field()
+    set_buttons(field, level)
 
     #---------------------------------------------game loop---------------------------------------------
     while True:
@@ -98,6 +101,14 @@ def main():
                 height = (abs(start_button.y - current_button.y) + 1)
 
                 selection_rect = pygame.Rect(x * field.tile_size, y * field.tile_size, width * field.tile_size, height * field.tile_size)
+
+        if check_win(field, level):
+            print("You win!")
+            if level + 1 <= len(LEVELS):
+                level += 1
+            else:
+                level = 1
+            set_buttons(field, level)
 
 
         #---------------------------------------------draw---------------------------------------------

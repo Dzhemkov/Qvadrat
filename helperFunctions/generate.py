@@ -25,6 +25,7 @@ def render(field, display):
             # if button.left_clicked:
             #     print(f"{button.number}, {button.color}")
 
+
 def get_button_at_mouse(self):
     mouse_pos = pygame.mouse.get_pos()
 
@@ -34,3 +35,82 @@ def get_button_at_mouse(self):
                 return button
 
     return None
+
+
+def check_win(field, level):    
+
+    for row, col, number, color in LEVELS[level - 1]:
+        if color == TileColor.BLOCK:
+            continue
+        if not count_contiguous(field, row, col, number, color):
+            return False
+
+    return True
+
+
+def count_contiguous(field, start_row, start_col, number, color):
+
+    buttons = field.buttons
+    visited = set()
+
+    def flood_fill(row, col):
+
+        if row < 0 or row >= N:        # Outside board
+            return 0
+        if col < 0 or col >= N:
+            return 0
+
+        if (row, col) in visited:        # Already visited
+            return 0
+
+        if buttons[row][col].color != color:        # Wrong color
+            return 0
+
+        visited.add((row, col))
+
+        count = 1
+
+        count += flood_fill(row + 1, col)        # Down
+        count += flood_fill(row - 1, col)        # Up
+        count += flood_fill(row, col + 1)        # Right
+        count += flood_fill(row, col - 1)        # Left
+
+        return count
+
+    return flood_fill(start_row, start_col) == number
+
+
+
+
+
+
+
+# def if_count_contiguous(field, row, col, number, color):
+
+#     buttons = field.buttons
+#     visited = set()
+    
+#     if buttons[row][col].color != TileColor.BLOCK:
+#         if row + 1 < N:
+#             if buttons[row + 1][col].color == color:
+#                 count += 1
+#                 if_count_contiguous(field, row + 1, col, buttons[row + 1][col].number, color)
+#         if row - 1 >= 0:
+#             if buttons[row - 1][col].color == color:
+#                 count += 1
+#                 if_count_contiguous(field, row - 1, col, buttons[row - 1][col].number, color)
+#         if col + 1 < N:
+#             if buttons[row][col + 1].color == color:
+#                 count += 1
+#                 if_count_contiguous(field, row, col + 1, buttons[row][col + 1].number, color)
+#         if col - 1 >= 0:
+#             if buttons[row][col - 1].color == color:
+#                 count += 1
+#                 if_count_contiguous(field, row, col - 1, buttons[row][col - 1].number, color)
+#         if count == number:
+#             win = True
+#         else:
+#             return False
+
+#     count = 1
+#     return win

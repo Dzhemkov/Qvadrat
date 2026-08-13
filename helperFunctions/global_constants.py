@@ -3,8 +3,8 @@ from enum import Enum
 from helperFunctions.timer import *
 
 
-WIDTH_TILES = 10
-HEIGHT_TILES = 10
+# WIDTH_TILES = 10
+# HEIGHT_TILES = 10
 SCREEN_SIZE = 800
 N = 7
 TILE_SIZE = SCREEN_SIZE // N
@@ -50,3 +50,46 @@ COLOR_VALUES = {
 }
 
 double_click = Timer(250)
+
+LEVELS = [
+       [
+            [0, 0, 5, TileColor.RED],
+            [3, 3, 9, TileColor.BLUE],
+            [3, 6, 10, TileColor.GREEN],
+            [4, 3, 7, TileColor.YELLOW],
+            [5, 0, 7, TileColor.PURPLE],
+            [5, 5, 4, TileColor.ORANGE],
+            [6, 0, 4, TileColor.PINK],
+            [1, 4, None, TileColor.BLOCK],
+            [2, 4, None, TileColor.BLOCK],
+            [2, 5, None, TileColor.BLOCK],
+       ],
+       [
+            [0, 5, 3, TileColor.RED],
+            [1, 1, 6, TileColor.BLUE],
+            [3, 4, 12, TileColor.GREEN],
+            [5, 2, 8, TileColor.YELLOW],
+            [5, 6, 6, TileColor.PURPLE],
+            [6, 0, 7, TileColor.ORANGE],
+            [6, 6, 5, TileColor.PINK],
+            [1, 6, None, TileColor.BLOCK],
+            [5, 3, None, TileColor.BLOCK],
+        ],
+        [
+            [0, 1, 9, TileColor.RED],
+            [1, 5, 3, TileColor.BLUE],
+            [3, 1, 6, TileColor.GREEN],
+            [3, 6, 5, TileColor.YELLOW],
+            [4, 3, 4, TileColor.PURPLE],
+            [4, 6, 7, TileColor.ORANGE],
+            [6, 2, 7, TileColor.PINK],
+            [2, 2, None, TileColor.BLOCK],
+            [2, 3, None, TileColor.BLOCK],
+            [3, 2, None, TileColor.BLOCK],
+            [3, 3, None, TileColor.BLOCK],
+            [3, 4, None, TileColor.BLOCK],
+            [4, 4, None, TileColor.BLOCK],
+            [5, 1, None, TileColor.BLOCK],
+            [5, 2, None, TileColor.BLOCK],
+        ],
+]
