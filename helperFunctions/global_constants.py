@@ -43,10 +43,10 @@ COLOR_VALUES = {
     TileColor.ORANGE: (255, 165, 0),
     TileColor.YELLOW: (255, 255, 0),
     TileColor.GREEN: (0, 255, 0),
-    TileColor.BLUE: (0, 0, 255),
+    TileColor.BLUE: (0, 255, 255),
     TileColor.PURPLE: (128, 0, 128),
     TileColor.PINK: (255, 105, 180),
 
 }
 
-double_click = Timer(500)
+double_click = Timer(250)

@@ -8,32 +8,23 @@ def main():
     pygame.init()
     pygame.display.set_caption('Qvadrat')
 
-
     screen = pygame.display.set_mode((SCREEN_SIZE, SCREEN_SIZE))
     display = pygame.Surface((SCREEN_SIZE, SCREEN_SIZE))
     clock = pygame.time.Clock()
 
-
     dragging = False
-    drag_start = None
-    drag_end = None
     start_button = None
     selection_rect = None
+    current_button = None
 
     field = make_field()
 
-
-    #game loop
+    #---------------------------------------------game loop---------------------------------------------
     while True:
-        #clock
+        #---------------------------------------------clock---------------------------------------------
         dt = clock.tick(60) / 1000
 
-        # if start_button.draw(screen):
-        # 	print('START')
-        # if exit_button.draw(screen):
-        # 	print('EXIT')
-
-        #event handler
+        #---------------------------------------------event handler---------------------------------------------
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -48,13 +39,10 @@ def main():
 
                             if button.rect.collidepoint(mouse_pos) and button.color != TileColor.BLOCK and button.color != TileColor.OPEN and button.number != None:
 
-                                # Double-click detected
                                 if double_click.active and button == start_button:
 
                                     for row2 in field.buttons:
                                         for button2 in row2:
-
-                                            #if button2.color == start_button.color:
                                             if button2.color == start_button.color and button2.number == None:
                                                 button2.color = TileColor.OPEN
 
@@ -75,16 +63,17 @@ def main():
                     if selection_rect is not None:
                         for row in field.buttons:
                             for button in row:
+
+                                if button.color == start_button.color and button.number == None and current_button != start_button:
+                                    button.color = TileColor.OPEN
                                 if selection_rect.colliderect(button.rect):
                                     if button.color == TileColor.OPEN:
                                         button.color = start_button.color
                     selection_rect = None
 
 
-        #update
-
+        #---------------------------------------------update---------------------------------------------
         double_click.update()
-
 
         if dragging and start_button is not None:
             mouse_pos = pygame.mouse.get_pos()
@@ -110,8 +99,8 @@ def main():
 
                 selection_rect = pygame.Rect(x * field.tile_size, y * field.tile_size, width * field.tile_size, height * field.tile_size)
 
-        #draw
 
+        #---------------------------------------------draw---------------------------------------------
         render(field, display)
 
         # Draw selection
@@ -120,16 +109,13 @@ def main():
             color = COLOR_VALUES[start_button.color]
 
             selection_surface = pygame.Surface(selection_rect.size, pygame.SRCALPHA)
-
             selection_surface.fill((*color, 100))
 
             display.blit(selection_surface, selection_rect.topleft)
-
             pygame.draw.rect(display, color, selection_rect, 3)
 
 
-
-        #display
+        #---------------------------------------------display---------------------------------------------
         screen.blit(pygame.transform.scale(display, screen.get_size()), (0, 0))
         pygame.display.update()
         

@@ -22,9 +22,8 @@ def render(field, display):
                 display.blit(field.highlight, (col_idx * field.tile_size, row_idx * field.tile_size))
 
 
-            #print(button.__dict__)
-            if button.left_clicked:
-                print(f"{button.number}, {button.color}")
+            # if button.left_clicked:
+            #     print(f"{button.number}, {button.color}")
 
 def get_button_at_mouse(self):
     mouse_pos = pygame.mouse.get_pos()
