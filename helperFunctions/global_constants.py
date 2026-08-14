@@ -3,13 +3,9 @@ from enum import Enum
 from helperFunctions.timer import *
 
 
-# WIDTH_TILES = 10
-# HEIGHT_TILES = 10
-SCREEN_SIZE = 800
+SCREEN_SIZE = 1200
 N = 7
 TILE_SIZE = SCREEN_SIZE // N
-
-base_path = os.path.dirname(__file__)
 
 IMAGES = {
     'BLUE_BLOCK_IMAGE': pygame.image.load("Sprites/blue_block.png"),
@@ -19,6 +15,7 @@ IMAGES = {
     'PURPLE_BLOCK_IMAGE': pygame.image.load("Sprites/purple_block.png"),
     'RED_BLOCK_IMAGE': pygame.image.load("Sprites/red_block.png"),
     'YELLOW_BLOCK_IMAGE': pygame.image.load("Sprites/yellow_block.png"),
+    'BLACK_BLOCK_IMAGE': pygame.image.load("Sprites/black_block.png"),
     'OPEN_FIELD_IMAGE': pygame.image.load("Sprites/open_field.png"),
     'BLOCK_FIELD_IMAGE': pygame.image.load("Sprites/block_field.png"),
     'HIGHLIGHT_IMAGE': pygame.image.load("Sprites/highlight.png"),
@@ -35,6 +32,7 @@ class TileColor(Enum):
     PURPLE = 6
     PINK = 7
     BLOCK = 8
+    BLACK = 9
     
 
 COLOR_VALUES = {
@@ -46,7 +44,7 @@ COLOR_VALUES = {
     TileColor.BLUE: (0, 255, 255),
     TileColor.PURPLE: (128, 0, 128),
     TileColor.PINK: (255, 105, 180),
-
+    TileColor.BLACK: (25, 25, 25),
 }
 
 double_click = Timer(250)
@@ -91,5 +89,15 @@ LEVELS = [
             [4, 4, None, TileColor.BLOCK],
             [5, 1, None, TileColor.BLOCK],
             [5, 2, None, TileColor.BLOCK],
+        ],
+        [
+            [0, 5, 3, TileColor.PURPLE],
+            [1, 1, 2, TileColor.BLUE],
+            [1, 3, 4, TileColor.ORANGE],
+            [3, 4, 12, TileColor.BLACK],
+            [5, 2, 8, TileColor.RED],
+            [5, 6, 7, TileColor.GREEN],
+            [6, 0, 7, TileColor.PINK],
+            [6, 6, 6, TileColor.YELLOW],
         ],
 ]

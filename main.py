@@ -12,6 +12,9 @@ def main():
     display = pygame.Surface((SCREEN_SIZE, SCREEN_SIZE))
     clock = pygame.time.Clock()
 
+    # font_size = max(12, int(SCREEN_SIZE * 0.5))
+    # FONT = pygame.font.Font(None, font_size)
+
     dragging = False
     start_button = None
     selection_rect = None
@@ -102,18 +105,24 @@ def main():
 
                 selection_rect = pygame.Rect(x * field.tile_size, y * field.tile_size, width * field.tile_size, height * field.tile_size)
 
-        if check_win(field, level):
-            print("You win!")
-            if level + 1 <= len(LEVELS):
-                level += 1
-            else:
-                level = 1
-            set_buttons(field, level)
+        # if check_win(field, level):
+        #     win_msg = field.font.render("Solved!", True, (0, 0, 0))
+        #     text_rect = win_msg.get_rect(center=(SCREEN_SIZE // 2, SCREEN_SIZE // 2))
+        #     display.blit(win_msg, text_rect)
+
+        #     pygame.display.flip()
+        #     pygame.time.delay(2000)
+
+        #     if level + 1 <= len(LEVELS):
+        #         level += 1
+        #     else:
+        #         level = 1
+        #     set_buttons(field, level)
 
 
         #---------------------------------------------draw---------------------------------------------
         render(field, display)
-
+            
         # Draw selection
         if selection_rect is not None and start_button is not None:
 
@@ -126,8 +135,42 @@ def main():
             pygame.draw.rect(display, color, selection_rect, 3)
 
 
+
+        #---------------------------------------------check_win() and render message---------------------------------------------
+
+        is_won = check_win(field, level)
+
+        # if is_won:
+        #     win_msg = field.font.render("Solved!", True, (0, 0, 0))
+        #     text_rect = win_msg.get_rect(center=(SCREEN_SIZE // 2, SCREEN_SIZE // 2))
+
+        #     bg_rect = text_rect.inflate(40, 20)
+        #     pygame.draw.rect(display, (0, 0, 0), bg_rect)
+
+        #     display.blit(win_msg, text_rect)
+
+
         #---------------------------------------------display---------------------------------------------
         screen.blit(pygame.transform.scale(display, screen.get_size()), (0, 0))
         pygame.display.update()
-        
+
+
+        #---------------------------------------------Level transition delay---------------------------------------------
+        if is_won:
+            pygame.time.delay(2000)
+
+            if level + 1 <= len(LEVELS):
+                level += 1
+            else:
+                level = 1
+
+            dragging = False
+            start_button = None
+            selection_rect = None
+            current_button = None
+
+            set_buttons(field, level)
+
+            #pygame.event.clear()
+
 main()

@@ -46,6 +46,10 @@ class Field:
             TileColor.PINK: pygame.transform.scale(
                 IMAGES['PINK_BLOCK_IMAGE'],
                 (self.tile_size, self.tile_size)
+            ),
+            TileColor.BLACK: pygame.transform.scale(
+                IMAGES['BLACK_BLOCK_IMAGE'],
+                (self.tile_size, self.tile_size)
             )
         }
 

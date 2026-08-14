@@ -6,7 +6,7 @@ def render(field, display):
     for row_idx, row in enumerate(field.buttons):  #(row_idx is y) and (col_idx is x)
         for col_idx, button in enumerate(row):
 
-            button.draw(field, row_idx, col_idx)
+            #button.draw(field, row_idx, col_idx)
 
             image = field.tile_images[button.color]
             display.blit(image, (col_idx * field.tile_size, row_idx * field.tile_size))
